@@ -9,7 +9,9 @@ import {
 	addNewTaskAction,
 	addNewTaskToDbAsyncAction,
 	deleteTaskAsyncAction,
-	toggleCompletedTasksAsyncAction
+	toggleCompletedTasksAsyncAction,
+	findTaskAction
+	
 } from './state/todo'
 
 const style={
@@ -51,6 +53,8 @@ const Todo = (props)=>(
 <TextField
  floatingLabelText='Find task'
  fullWidth={true}
+ 
+ onChange={props._findTaskAction}
  />
 <RaisedButton
  label={'All'}
@@ -64,14 +68,14 @@ const Todo = (props)=>(
  primary={true}
  style={style.button}
  fullWidth={true}
- onClick={()=>{}}
+ onClick={()=>alert('not implemented yet')}
  />
  <RaisedButton
  label={'To Be Done'}
  primary={true}
  style={style.button}
  fullWidth={true}
- onClick={()=>{}}
+ onClick={()=>alert('not implemented yet')}
  />
  
 
@@ -79,9 +83,9 @@ const Todo = (props)=>(
 	style={style.list}
  >
 	{
-		props._allTasks &&
-		props._allTasks.map ?
-		props._allTasks.map(task=>
+		props._visibleTasks &&
+		props._visibleTasks.map ?
+		props._visibleTasks.map(task=>
 			// console.log(task)
 			<ListItem
 			key={task.key}
@@ -110,14 +114,18 @@ const Todo = (props)=>(
 
 const mapStateToProps =(state)=>({
 	_newTask: state.todo.newTask,
-	_allTasks: state.todo.allTasks
+	_allTasks: state.todo.allTasks,
+	_visibleTasks: state.todo.visibleTasks,
+	_filter: state.todo.filter
 })
 
 const mapDispatchToProps=(dispatch)=>({
 	_addNewTaskAction: event=>dispatch(addNewTaskAction(event.target.value)),
 	_addNewTaskToDbAsyncAction: ()=>dispatch(addNewTaskToDbAsyncAction()),
 	_deleteTaskAsyncAction: (key)=>dispatch(deleteTaskAsyncAction(key)),
-	_toggleCompletedTasksAsyncAction: (task)=>dispatch(toggleCompletedTasksAsyncAction(task))
+	_toggleCompletedTasksAsyncAction: (task)=>dispatch(toggleCompletedTasksAsyncAction(task)),
+	_findTaskAction: (event)=>dispatch(findTaskAction(event.target.value))
+	
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Todo)

@@ -4,12 +4,14 @@ import {database} from '../firebaseConfig'
 const ADD_NEW_TASK = 'todo/ADD_NEW_TASK'
 const GET_TASKS ='todo/GET_TASKS'
 const ClEAN_ADD_NEW_TASK_INPUT_FIELD='todo/ClEAN_ADD_NEW_TASK_INPUT_FIELD'
+const FIND_TASK ='todo/FIND_TASK'
 
 const INITIAL_STATE= {
-    allTasks: null,
+    allTasks: [],
     visibleTasks:[],
     newTask:'',
-    isCompleted:false
+    isCompleted:false,
+    filter:''
 
 }
 
@@ -23,9 +25,14 @@ const getTasksAction=tasks=>({
     tasks
 })
 
-export const cleanAddNewTaskInputField= () =>({
+const cleanAddNewTaskInputFieldAction= () =>({
     type:ClEAN_ADD_NEW_TASK_INPUT_FIELD
 })
+
+export const findTaskAction=(text)=>({
+    type:FIND_TASK,
+    input:text
+}) 
 
 export const addNewTaskToDbAsyncAction=()=>(dispatch,getState)=>{
     const newTask=getState().todo.newTask
@@ -39,7 +46,7 @@ export const addNewTaskToDbAsyncAction=()=>(dispatch,getState)=>{
         newTask,
         isCompleted
     })
-   dispatch(cleanAddNewTaskInputField())
+   dispatch(cleanAddNewTaskInputFieldAction())
 
 }
 
@@ -88,12 +95,29 @@ export default (state=INITIAL_STATE,action)=>{
         case GET_TASKS:
             return{
                 ...state,
-                allTasks: action.tasks
+                allTasks: action.tasks,
+                visibleTasks: action.tasks
+                
             }
         case ClEAN_ADD_NEW_TASK_INPUT_FIELD:
             return{
                 ...state,
                 newTask:''
+            }
+        case FIND_TASK:
+            return{
+                ...state,
+                filter: action.input,
+                visibleTasks: state.allTasks
+                        .filter(task=>
+                            task.newTask
+                            .toLowerCase()
+                            .replace(/\s/g, '')
+                            .normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+                            .includes(state.filter
+                                .toLowerCase()
+                                .replace(/\s/g, '')
+                                .normalize('NFD').replace(/[\u0300-\u036f]/g, "")))
             }
         default:
            return state
