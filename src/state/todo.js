@@ -2,11 +2,13 @@ import {database} from '../firebaseConfig'
 
 const ADD_NEW_TASK = 'todo/ADD_NEW_TASK'
 const GET_TASKS ='todo/GET_TASKS'
+const DELETE_TASK= 'todo/DELETE_TASK'
 
 const INITIAL_STATE= {
     allTasks: null,
     visibleTasks:[],
-    newTask:''
+    newTask:'',
+    isCompleted:false
 
 }
 
@@ -21,17 +23,23 @@ const getTasksAction=tasks=>({
     tasks
 })
 
+export const deleteTaskAction= index =>({
+    type:DELETE_TASK,
+    index
+})
+
 
 
 export const addNewTaskToDbAsyncAction=()=>(dispatch,getState)=>{
     const newTask=getState().todo.newTask
     const uuid=getState().auth.user.uid
-    
+    const isCompleted=getState().todo.isCompleted
     newTask==='' ? 
     alert('No pain no gain. Add some task !!!')
     :
     database.ref(`users/${uuid}/tasks`).push({
-        newTask
+        newTask,
+        isCompleted
     })
 }
 
@@ -42,6 +50,7 @@ export const getTasksFromDbAsyncAction=()=>(dispatch,getState)=>{
         'value',
         snapshot => {
             console.log(snapshot.val())
+            
             const tasks = Object.entries(
                 snapshot.val()
             ).map(entry => ({
@@ -66,6 +75,13 @@ export default (state=INITIAL_STATE,action)=>{
             return{
                 ...state,
                 allTasks: action.tasks
+            }
+        case DELETE_TASK:
+            const allButDeleted= state.allTasks
+                .filter((task,index)=>!(index===action.index))
+            return{
+                ...state,
+                allTasks:allButDeleted
             }
 
     

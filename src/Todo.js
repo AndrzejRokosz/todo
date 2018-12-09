@@ -1,7 +1,8 @@
 import React from 'react'
 
 import Paper from 'material-ui/Paper/Paper';
-import { TextField, RaisedButton, List,ListItem } from 'material-ui';
+import { TextField, RaisedButton, List,ListItem, Checkbox, IconButton } from 'material-ui';
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
 import {connect} from 'react-redux'
 import {addNewTaskAction,addNewTaskToDbAsyncAction} from './state/todo'
@@ -18,7 +19,6 @@ const style={
  list:{
 
  }
-
 }
 
 const Todo = (props)=>(
@@ -29,21 +29,27 @@ const Todo = (props)=>(
  <TextField
  floatingLabelText='Add new task'
  value={props._newTask}
+ fullWidth={true}
  onChange={props._addNewTaskAction}
+
  />
  <RaisedButton
  label={'Add'}
  primary={true}
  style={style.button}
+ fullWidth={true}
  onClick={props._addNewTaskToDbAsyncAction}
+
  />
 <TextField
  floatingLabelText='Find task'
+ fullWidth={true}
  />
 <RaisedButton
  label={'All'}
  primary={true}
  style={style.button}
+ fullWidth={true}
  onClick={()=>{}}
  />
 
@@ -57,7 +63,20 @@ const Todo = (props)=>(
 			// console.log(task)
 			<ListItem
 			key={task.key}
-			primaryText={task.newTask}/>
+			primaryText={task.newTask}
+			leftCheckbox={<Checkbox
+							defaultChecked={task.isCompleted}
+							onCheck={()=>alert('checked/unchecked')}
+			
+			
+						/>}
+			rightIconButton={<IconButton
+							onClick={()=>alert('clicked')}
+							>
+							<DeleteIcon/>
+							</IconButton>
+							}
+			/>
 			)
 			:
 			null
