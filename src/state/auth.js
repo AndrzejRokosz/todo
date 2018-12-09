@@ -1,6 +1,5 @@
 //reducer
 import { auth, googleProvider, database } from '../firebaseConfig'
-import { loadTextFromDbAsyncAction } from './userData';
 
 
 const LOG_IN = 'auth/LOG_IN'
@@ -14,7 +13,7 @@ export const initAuthChangeListeningAction = () => (dispatch, getState) => {
             if (user) {
                 dispatch(logInAction(user))
                 dispatch(saveLoginTimeStampAsyncAction())
-                dispatch(loadTextFromDbAsyncAction()) //sync actions
+           
             } else {
                 dispatch(logOutAction())
             }

@@ -1,12 +1,12 @@
 import firebase from 'firebase'
 
 const config = {
-    apiKey: "AIzaSyDnO9_gZeUq2jFpx0r_SCunuanVsllsPG8",
-    authDomain: "moj-firebase.firebaseapp.com",
-    databaseURL: "https://moj-firebase.firebaseio.com",
-    projectId: "moj-firebase",
-    storageBucket: "moj-firebase.appspot.com",
-    messagingSenderId: "558684420559"
+    apiKey: "AIzaSyB4Hajohm56StE-iXoUVRI1FKX8ahDTF3Y",
+    authDomain: "todo-3e305.firebaseapp.com",
+    databaseURL: "https://todo-3e305.firebaseio.com",
+    projectId: "todo-3e305",
+    storageBucket: "todo-3e305.appspot.com",
+    messagingSenderId: "905562040609"
 }
 
 firebase.initializeApp(config)

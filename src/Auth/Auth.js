@@ -1,7 +1,7 @@
 import React from 'react'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 
-import { auth, googleProvider } from '../firebaseConfig'
+// import { auth, googleProvider } from '../firebaseConfig'
 import { connect } from 'react-redux'
 import Forms from './Forms'
 import {

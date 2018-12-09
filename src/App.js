@@ -1,19 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react'
 import Auth from './Auth'
-import {database} from './firebaseConfig'
-import UserData from './UserData';
+import Todo from './Todo'
 
-const App = (props) => (
-  <div>
-  <Auth>
-    <div>
-     <UserData/>
-    </div>
-  </Auth>
+class App extends React.Component{
 
-  </div>
-
+  render(){
+return(
+  <Todo/>
 )
+  }
 
+  // <div>
+  // <Auth>
+  //   <div>
+  //    <Todo
+  //   </div>
+  // </Auth>
 
-export default App;
+  // </div>
+
+}
+
+export default App
