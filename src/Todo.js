@@ -1,6 +1,10 @@
 import React from 'react'
+
 import Paper from 'material-ui/Paper/Paper';
-import { TextField, RaisedButton, List } from 'material-ui';
+import { TextField, RaisedButton, List,ListItem } from 'material-ui';
+
+import {connect} from 'react-redux'
+
 
 const style={
  paper:{
@@ -53,6 +57,11 @@ const Todo = (props)=>(
  </Paper>
 
 )
+const mapStateToProps =(state)=>({
 
+})
+const mapDispatchToProps=(dispatch)=>({
 
-export default Todo
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Todo)
