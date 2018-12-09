@@ -1,11 +1,12 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import auth from './state/auth'
-
+import todo from './state/todo'
 // import reducers here
 
 const reducer = combineReducers({
-   auth
+   auth,
+   todo
    
 })
 

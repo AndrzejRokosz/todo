@@ -1,4 +1,3 @@
-//reducer
 import { auth, googleProvider, database } from '../firebaseConfig'
 
 
@@ -6,14 +5,14 @@ const LOG_IN = 'auth/LOG_IN'
 const LOG_OUT = 'auth/LOG_OUT'
 const EMAIL_CHANGE = 'auth/EMAIL_CHANGE'
 const PASSWORD_CHANGE = 'auth/PASSWORD_CHANGE'
+
 export const initAuthChangeListeningAction = () => (dispatch, getState) => {
-    auth.onAuthStateChanged( ///async action
+    auth.onAuthStateChanged( 
 
         user => {
             if (user) {
                 dispatch(logInAction(user))
-                dispatch(saveLoginTimeStampAsyncAction())
-           
+               
             } else {
                 dispatch(logOutAction())
             }
@@ -31,21 +30,13 @@ export const loginByGoogleAsyncAction = () => (dispatch, getState) => {
 
 export const logInAsyncWithEmailAndPassword = () => (dispatch, getState) => {
     const { auth: { email, password } } = getState()
-    //above destruct is the same as
-    // const email =getState().auth.email
-    // const password =getState().auth.password
+
     auth.signInWithEmailAndPassword(email, password)
         .catch(error => {
-            alert('Something is wrong! Check console for error details!')
-            console.log(error)
+            alert('Something is wrong!')
+         
         })
 
-}
-//login uzytkownika nnnnnnggg
-const saveLoginTimeStampAsyncAction = () => (dispatch, getState) => {
-    database.ref('/loginsLogs').push({
-        timestamp: Date.now()
-    })
 }
 
 export const emailChangeAction = newValue => ({
@@ -61,14 +52,14 @@ const logInAction = (user) => ({
     type: LOG_IN,
     user
 })
-//action creators
+
 const logOutAction = () => ({ type: LOG_OUT })
 
-const INITIAL_STATE = {  //trzymamy czy zalog/niezalog
+const INITIAL_STATE = {  
     isUserLoggedIn: false,
     email: '',
     password: '',
-    user: null  //do zapisu do local.storage
+    user: null 
 }
 
 export default (state = INITIAL_STATE, action) => {
