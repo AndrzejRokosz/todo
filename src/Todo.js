@@ -11,7 +11,9 @@ import {
 	deleteTaskAsyncAction,
 	toggleCompletedTasksAsyncAction,
 	findTaskAction,
-	showAllTasksAction
+	showAllTasksAction,
+	showCompletedTasksAction,
+	showUnCompletedTasksAction
 	
 } from './state/todo'
 
@@ -69,14 +71,14 @@ const Todo = (props)=>(
  primary={true}
  style={style.button}
  fullWidth={true}
- onClick={()=>alert('not implemented yet')}
+ onClick={props._showCompletedTasksAction}
  />
  <RaisedButton
  label={'To Be Done'}
  primary={true}
  style={style.button}
  fullWidth={true}
- onClick={()=>alert('not implemented yet')}
+ onClick={props._showUnCompletedTasksAction}
  />
  
 
@@ -126,7 +128,9 @@ const mapDispatchToProps=(dispatch)=>({
 	_deleteTaskAsyncAction: (key)=>dispatch(deleteTaskAsyncAction(key)),
 	_toggleCompletedTasksAsyncAction: (task)=>dispatch(toggleCompletedTasksAsyncAction(task)),
 	_findTaskAction: (event)=>dispatch(findTaskAction(event.target.value)),
-	_showAllTasksAction: ()=>dispatch(showAllTasksAction())
+	_showAllTasksAction: ()=>dispatch(showAllTasksAction()),
+	_showCompletedTasksAction: ()=>dispatch(showCompletedTasksAction()),
+	_showUnCompletedTasksAction: ()=>dispatch(showUnCompletedTasksAction())
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Todo)

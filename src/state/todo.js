@@ -6,6 +6,9 @@ const GET_TASKS ='todo/GET_TASKS'
 const ClEAN_ADD_NEW_TASK_INPUT_FIELD='todo/ClEAN_ADD_NEW_TASK_INPUT_FIELD'
 const FIND_TASK ='todo/FIND_TASK'
 const SHOW_ALL='todo/SHOW_ALL'
+const SHOW_COMPLETED='todo/SHOW_COMPLETED'
+const SHOW_UNCOMPLETED='todo/SHOW_UNCOMPLETED'
+
 
 const INITIAL_STATE= {
     allTasks: [],
@@ -37,6 +40,14 @@ export const findTaskAction=(text)=>({
 
 export const showAllTasksAction=()=>({
     type:SHOW_ALL
+})
+
+export const showCompletedTasksAction=()=>({
+    type:SHOW_COMPLETED
+})
+
+export const showUnCompletedTasksAction=()=>({
+    type:SHOW_UNCOMPLETED
 })
 
 export const addNewTaskToDbAsyncAction=()=>(dispatch,getState)=>{
@@ -89,7 +100,6 @@ export const toggleCompletedTasksAsyncAction=(task)=>(dispatch,getState)=>{
 
 }
 
-
 export default (state=INITIAL_STATE,action)=>{
     switch (action.type) {
         case ADD_NEW_TASK: 
@@ -129,6 +139,18 @@ export default (state=INITIAL_STATE,action)=>{
                 ...state,
                 visibleTasks: state.allTasks
                         .map(task=>task)
+            }
+        case SHOW_COMPLETED:
+            return{
+                ...state,
+                visibleTasks: state.allTasks
+                        .filter(task=>task.isCompleted)
+            }
+            case SHOW_UNCOMPLETED:
+            return{
+                ...state,
+                visibleTasks: state.allTasks
+                        .filter(task=>!task.isCompleted)
             }
         default:
            return state
