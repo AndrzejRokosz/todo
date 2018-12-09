@@ -1,12 +1,12 @@
 import firebase from 'firebase'
 
 const config = {
-    apiKey: "AIzaSyB4Hajohm56StE-iXoUVRI1FKX8ahDTF3Y",
-    authDomain: "todo-3e305.firebaseapp.com",
-    databaseURL: "https://todo-3e305.firebaseio.com",
-    projectId: "todo-3e305",
-    storageBucket: "todo-3e305.appspot.com",
-    messagingSenderId: "905562040609"
+    apiKey: "AIzaSyCPkPrhzrKWxt_HZieGQLyqfPY74p-fghw",
+    authDomain: "todo-lists-68c75.firebaseapp.com",
+    databaseURL: "https://todo-lists-68c75.firebaseio.com",
+    projectId: "todo-lists-68c75",
+    storageBucket: "todo-lists-68c75.appspot.com",
+    messagingSenderId: "66210521413"
 }
 
 firebase.initializeApp(config)

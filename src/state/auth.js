@@ -13,6 +13,7 @@ export const initAuthChangeListeningAction = () => (dispatch, getState) => {
             if (user) {
                 dispatch(logInAction(user))
                
+              
             } else {
                 dispatch(logOutAction())
             }
