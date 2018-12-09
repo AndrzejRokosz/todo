@@ -10,7 +10,8 @@ import {
 	addNewTaskToDbAsyncAction,
 	deleteTaskAsyncAction,
 	toggleCompletedTasksAsyncAction,
-	findTaskAction
+	findTaskAction,
+	showAllTasksAction
 	
 } from './state/todo'
 
@@ -61,7 +62,7 @@ const Todo = (props)=>(
  primary={true}
  style={style.button}
  fullWidth={true}
- onClick={()=>{}}
+ onClick={props._showAllTasksAction}
  />
  <RaisedButton
  label={'Completed'}
@@ -124,8 +125,8 @@ const mapDispatchToProps=(dispatch)=>({
 	_addNewTaskToDbAsyncAction: ()=>dispatch(addNewTaskToDbAsyncAction()),
 	_deleteTaskAsyncAction: (key)=>dispatch(deleteTaskAsyncAction(key)),
 	_toggleCompletedTasksAsyncAction: (task)=>dispatch(toggleCompletedTasksAsyncAction(task)),
-	_findTaskAction: (event)=>dispatch(findTaskAction(event.target.value))
-	
+	_findTaskAction: (event)=>dispatch(findTaskAction(event.target.value)),
+	_showAllTasksAction: ()=>dispatch(showAllTasksAction())
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Todo)

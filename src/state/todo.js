@@ -5,6 +5,7 @@ const ADD_NEW_TASK = 'todo/ADD_NEW_TASK'
 const GET_TASKS ='todo/GET_TASKS'
 const ClEAN_ADD_NEW_TASK_INPUT_FIELD='todo/ClEAN_ADD_NEW_TASK_INPUT_FIELD'
 const FIND_TASK ='todo/FIND_TASK'
+const SHOW_ALL='todo/SHOW_ALL'
 
 const INITIAL_STATE= {
     allTasks: [],
@@ -32,7 +33,11 @@ const cleanAddNewTaskInputFieldAction= () =>({
 export const findTaskAction=(text)=>({
     type:FIND_TASK,
     input:text
-}) 
+})
+
+export const showAllTasksAction=()=>({
+    type:SHOW_ALL
+})
 
 export const addNewTaskToDbAsyncAction=()=>(dispatch,getState)=>{
     const newTask=getState().todo.newTask
@@ -118,6 +123,12 @@ export default (state=INITIAL_STATE,action)=>{
                                 .toLowerCase()
                                 .replace(/\s/g, '')
                                 .normalize('NFD').replace(/[\u0300-\u036f]/g, "")))
+            }
+        case SHOW_ALL:
+            return{
+                ...state,
+                visibleTasks: state.allTasks
+                        .map(task=>task)
             }
         default:
            return state
