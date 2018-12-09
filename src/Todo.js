@@ -5,7 +5,11 @@ import { TextField, RaisedButton, List,ListItem, Checkbox, IconButton } from 'ma
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
 import {connect} from 'react-redux'
-import {addNewTaskAction,addNewTaskToDbAsyncAction} from './state/todo'
+import {
+	addNewTaskAction,
+	addNewTaskToDbAsyncAction,
+	deleteTaskAsyncAction
+} from './state/todo'
 
 const style={
  paper:{
@@ -66,12 +70,10 @@ const Todo = (props)=>(
 			primaryText={task.newTask}
 			leftCheckbox={<Checkbox
 							defaultChecked={task.isCompleted}
-							onCheck={()=>alert('checked/unchecked')}
-			
-			
+							onCheck={()=>alert('checked/unchecked')}			
 						/>}
 			rightIconButton={<IconButton
-							onClick={()=>alert('clicked')}
+							onClick={()=>props._deleteTaskAsyncAction(task.key)}
 							>
 							<DeleteIcon/>
 							</IconButton>
@@ -95,7 +97,8 @@ const mapStateToProps =(state)=>({
 
 const mapDispatchToProps=(dispatch)=>({
 	_addNewTaskAction: event=>dispatch(addNewTaskAction(event.target.value)),
-	_addNewTaskToDbAsyncAction: ()=>dispatch(addNewTaskToDbAsyncAction())
+	_addNewTaskToDbAsyncAction: ()=>dispatch(addNewTaskToDbAsyncAction()),
+	_deleteTaskAsyncAction: (key)=>dispatch(deleteTaskAsyncAction(key))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Todo)
