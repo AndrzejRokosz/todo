@@ -64,6 +64,14 @@ export const deleteTaskAsyncAction= (key)=>(dispatch,getState)=>{
     database.ref(`users/${uuid}/tasks`).child(key).remove()
 }
 
+export const toggleCompletedTasksAsyncAction=(task)=>(dispatch,getState)=>{
+    const uuid=getState().auth.user.uid
+    database.ref(`users/${uuid}/tasks/${task.key}`).update({
+        isCompleted: !task.isCompleted
+    })
+
+}
+
 
 export default (state=INITIAL_STATE,action)=>{
     switch (action.type) {
@@ -78,8 +86,6 @@ export default (state=INITIAL_STATE,action)=>{
                 allTasks: action.tasks
             }
        
-
-    
         default:
            return state
     }

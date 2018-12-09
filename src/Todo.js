@@ -8,7 +8,8 @@ import {connect} from 'react-redux'
 import {
 	addNewTaskAction,
 	addNewTaskToDbAsyncAction,
-	deleteTaskAsyncAction
+	deleteTaskAsyncAction,
+	toggleCompletedTasksAsyncAction
 } from './state/todo'
 
 const style={
@@ -70,7 +71,7 @@ const Todo = (props)=>(
 			primaryText={task.newTask}
 			leftCheckbox={<Checkbox
 							defaultChecked={task.isCompleted}
-							onCheck={()=>alert('checked/unchecked')}			
+							onCheck={()=>props._toggleCompletedTasksAsyncAction(task)}			
 						/>}
 			rightIconButton={<IconButton
 							onClick={()=>props._deleteTaskAsyncAction(task.key)}
@@ -98,7 +99,8 @@ const mapStateToProps =(state)=>({
 const mapDispatchToProps=(dispatch)=>({
 	_addNewTaskAction: event=>dispatch(addNewTaskAction(event.target.value)),
 	_addNewTaskToDbAsyncAction: ()=>dispatch(addNewTaskToDbAsyncAction()),
-	_deleteTaskAsyncAction: (key)=>dispatch(deleteTaskAsyncAction(key))
+	_deleteTaskAsyncAction: (key)=>dispatch(deleteTaskAsyncAction(key)),
+	_toggleCompletedTasksAsyncAction: (task)=>dispatch(toggleCompletedTasksAsyncAction(task))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Todo)
