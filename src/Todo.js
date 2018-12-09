@@ -50,9 +50,18 @@ const Todo = (props)=>(
  <List
 	style={style.list}
  >
-
-
-
+	{
+		props._allTasks &&
+		props._allTasks.map ?
+		props._allTasks.map(task=>
+			// console.log(task)
+			<ListItem
+			key={task.key}
+			primaryText={task.newTask}/>
+			)
+			:
+			null
+	}
 
  </List>
 
@@ -61,7 +70,8 @@ const Todo = (props)=>(
 )
 
 const mapStateToProps =(state)=>({
-	_newTask: state.todo._newTask
+	_newTask: state.todo._newTask,
+	_allTasks: state.todo.allTasks
 })
 
 const mapDispatchToProps=(dispatch)=>({

@@ -4,7 +4,7 @@ const ADD_NEW_TASK = 'todo/ADD_NEW_TASK'
 const GET_TASKS ='todo/GET_TASKS'
 
 const INITIAL_STATE= {
-    tasks: null,
+    allTasks: null,
     visibleTasks:[],
     newTask:''
 
@@ -24,11 +24,14 @@ const getTasksAction=tasks=>({
 
 
 export const addNewTaskToDbAsyncAction=()=>(dispatch,getState)=>{
-    const newTaskToDb=getState().todo.newTask
+    const newTask=getState().todo.newTask
     const uuid=getState().auth.user.uid
-    console.log(uuid)
+    
+    newTask==='' ? 
+    alert('No pain no gain. Add some task !!!')
+    :
     database.ref(`users/${uuid}/tasks`).push({
-        newTaskToDb
+        newTask
     })
 }
 
@@ -62,7 +65,7 @@ export default (state=INITIAL_STATE,action)=>{
         case GET_TASKS:
             return{
                 ...state,
-                tasks: action.tasks
+                allTasks: action.tasks
             }
 
     
