@@ -16,8 +16,8 @@ export const addNewTaskAction=text=>({
 
 export const addNewTaskToDbAsyncAction=()=>(dispatch,getState)=>{
     const newTaskToDb=getState().todo.newTask
-    const userID=getState().auth.user.uuid
-    database.ref(`users/${userID}/tasks`).push({
+    const uuid=getState().auth.user.uuid
+    database.ref(`/tasks/${uuid}/`).push({
         newTaskToDb
     })
 }
