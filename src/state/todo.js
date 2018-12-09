@@ -3,7 +3,7 @@ import {database} from '../firebaseConfig'
 
 const ADD_NEW_TASK = 'todo/ADD_NEW_TASK'
 const GET_TASKS ='todo/GET_TASKS'
-
+const ClEAN_ADD_NEW_TASK_INPUT_FIELD='todo/ClEAN_ADD_NEW_TASK_INPUT_FIELD'
 
 const INITIAL_STATE= {
     allTasks: null,
@@ -12,7 +12,6 @@ const INITIAL_STATE= {
     isCompleted:false
 
 }
-
 
 export const addNewTaskAction=text=>({
     type:ADD_NEW_TASK,
@@ -24,18 +23,24 @@ const getTasksAction=tasks=>({
     tasks
 })
 
+export const cleanAddNewTaskInputField= () =>({
+    type:ClEAN_ADD_NEW_TASK_INPUT_FIELD
+})
+
 export const addNewTaskToDbAsyncAction=()=>(dispatch,getState)=>{
     const newTask=getState().todo.newTask
     const uuid=getState().auth.user.uid
     const isCompleted=getState().todo.isCompleted
 
     newTask==='' ? 
-    alert('No pain no gain. Add some task !!!')
+    alert('No pain no gain. Add not empty task !!!')
     :
     database.ref(`users/${uuid}/tasks`).push({
         newTask,
         isCompleted
     })
+   dispatch(cleanAddNewTaskInputField())
+
 }
 
 export const getTasksFromDbAsyncAction=()=>(dispatch,getState)=>{
@@ -44,7 +49,6 @@ export const getTasksFromDbAsyncAction=()=>(dispatch,getState)=>{
     database.ref(`users/${uuid}/tasks`).on(
         'value',
         snapshot => {
-            console.log(snapshot.val())
             if(snapshot.val()) {
             
                 const tasks = Object.entries( snapshot.val() )
@@ -53,6 +57,7 @@ export const getTasksFromDbAsyncAction=()=>(dispatch,getState)=>{
                                 key: entry[0]
                             }))
                 dispatch(getTasksAction(tasks))
+                
             } 
             else dispatch(getTasksAction(null))
         }
@@ -85,7 +90,11 @@ export default (state=INITIAL_STATE,action)=>{
                 ...state,
                 allTasks: action.tasks
             }
-       
+        case ClEAN_ADD_NEW_TASK_INPUT_FIELD:
+            return{
+                ...state,
+                newTask:''
+            }
         default:
            return state
     }

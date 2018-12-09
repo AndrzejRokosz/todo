@@ -19,6 +19,8 @@ const style={
 
  },
  button:{
+	 margin:1,
+	 padding:1
 
  },
  list:{
@@ -57,6 +59,21 @@ const Todo = (props)=>(
  fullWidth={true}
  onClick={()=>{}}
  />
+ <RaisedButton
+ label={'Completed'}
+ primary={true}
+ style={style.button}
+ fullWidth={true}
+ onClick={()=>{}}
+ />
+ <RaisedButton
+ label={'To Be Done'}
+ primary={true}
+ style={style.button}
+ fullWidth={true}
+ onClick={()=>{}}
+ />
+ 
 
  <List
 	style={style.list}
@@ -92,7 +109,7 @@ const Todo = (props)=>(
 )
 
 const mapStateToProps =(state)=>({
-	_newTask: state.todo._newTask,
+	_newTask: state.todo.newTask,
 	_allTasks: state.todo.allTasks
 })
 
