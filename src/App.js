@@ -5,19 +5,17 @@ import Todo from './Todo'
 class App extends React.Component{
 
   render(){
-return(
-  <Todo/>
+  return(
+  <div>
+     <Auth>
+        <div>
+          <Todo/>
+        </div>
+    </Auth>
+  </div>
+
 )
   }
-
-  // <div>
-  // <Auth>
-  //   <div>
-  //    <Todo
-  //   </div>
-  // </Auth>
-
-  // </div>
 
 }
 
