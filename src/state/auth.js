@@ -8,13 +8,13 @@ const EMAIL_CHANGE = 'auth/EMAIL_CHANGE'
 const PASSWORD_CHANGE = 'auth/PASSWORD_CHANGE'
 
 export const initAuthChangeListeningAction = () => (dispatch, getState) => {
-    auth.onAuthStateChanged( 
+    auth.onAuthStateChanged(
 
         user => {
             if (user) {
                 dispatch(logInAction(user))
                 dispatch(getTasksFromDbAsyncAction())
-              
+
             } else {
                 dispatch(logOutAction())
             }
@@ -36,7 +36,7 @@ export const logInAsyncWithEmailAndPassword = () => (dispatch, getState) => {
     auth.signInWithEmailAndPassword(email, password)
         .catch(error => {
             alert('Something is wrong!')
-         
+
         })
 
 }
@@ -57,11 +57,11 @@ const logInAction = (user) => ({
 
 const logOutAction = () => ({ type: LOG_OUT })
 
-const INITIAL_STATE = {  
+const INITIAL_STATE = {
     isUserLoggedIn: false,
     email: '',
     password: '',
-    user: null 
+    user: null
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -76,7 +76,7 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isUserLoggedIn: false,
-                user:null
+                user: null
             }
         case EMAIL_CHANGE:
             return {

@@ -8,7 +8,7 @@ import { store } from './store'
 
 ReactDOM.render(
     <Provider
-    store={store}>
+        store={store}>
         <MuiThemeProvider>
             <App />
         </MuiThemeProvider>

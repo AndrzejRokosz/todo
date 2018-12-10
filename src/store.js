@@ -5,9 +5,9 @@ import todo from './state/todo'
 // import reducers here
 
 const reducer = combineReducers({
-   auth,
-   todo
-   
+    auth,
+    todo
+
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
